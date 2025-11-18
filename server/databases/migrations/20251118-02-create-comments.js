@@ -1,13 +1,13 @@
 /** 
-* @file databases/migration/20251117-01-create-users.js
-  @description users migration file
-  251117 v1.0.0 kimjunghyun init
+* @file databases/migration/20251118-02-create-comments.js
+  @description comments migration file
+  251118 v1.0.0 kimjunghyun init
 */ 
 
 import { DataTypes } from 'sequelize';
 
 // 테이블명
-const tableName = 'users';
+const tableName = 'comments';
 
 // 컬럼 정의
 const attributes = {
@@ -17,52 +17,32 @@ const attributes = {
     primaryKey: true,
     allowNull: false,
     autoIncrement: true,
+    comment: '코멘트 PK',
+  },
+  userId: {
+    field: 'user_id',
+    type: DataTypes.BIGINT.UNSIGNED,
+    allowNull: false,
     comment: '유저 PK',
   },
-  email: {
-    field: 'email',
-    type: DataTypes.STRING(100),
+  postId: {
+    field: 'post_id',
+    type: DataTypes.BIGINT.UNSIGNED,
     allowNull: false,
-    unique: true,
-    comment: '이메일(로그인ID)'
+    comment: '게시글 PK',
   },
-  password: {
-    field: 'password',
-    type: DataTypes.STRING(255),
+  content: {
+    field: 'content',
+    type: DataTypes.STRING(1000),
     allowNull: false,
-    comment: '비밀번호',
+    comment: '내용',
   },
-  nick: {
-    field: 'nick',
-    type: DataTypes.STRING(15),
+  replyId: {
+    field: 'reply_id',
+    type: DataTypes.BIGINT.UNSIGNED,
     allowNull: false,
-    unique: true,
-    comment: '닉네임'
-  },
-  provider: {
-    field: 'provider',
-    type: DataTypes.STRING(10),
-    allowNull: false,
-    comment: '로그인 제공자(NONE, KAKAO, GOOGLE...)'
-  },
-  role: {
-    field: 'role',
-    type: DataTypes.STRING(10),
-    allowNull: false,
-    comment: '유저 권한(NOMAL, SUPER...)'
-  },
-  profile: {
-    field: 'profile',
-    type: DataTypes.STRING(100),
-    allowNull: false,
-    comment: '유저 프로필',
-  },
-  refreshToken: {
-    field : 'refresh_token',
-    type: DataTypes.STRING(255),
-    allowNull: true,
-    comment: '리프레시 토큰',
-  },
+    comment: '대댓글 PK',
+  },  
   createdAt: {
     field: 'created_at',
     type: DataTypes.DATE,
@@ -83,7 +63,7 @@ const attributes = {
 // 옵션 설정
 const options = {
   charset: 'utf8mb4', // 테이블 문자셋 설정(이모지 지원)
-  collate: 'utf8mb4_bin', // 정렬 방식 설정(영어 대소문자 구분 정렬)
+  collate: 'utf8mb4_0900_ai_ci', // 정렬 방식 설정(기본 설정)
   engine: 'InnoDB' // 사용 엔진 설정
 };
 
