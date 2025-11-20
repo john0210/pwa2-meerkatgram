@@ -15,3 +15,5 @@ authRouter.post('/login', loginValidator, validationHandler, authController.logi
 
 export default authRouter;
 
+
+
