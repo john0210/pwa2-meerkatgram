@@ -126,11 +126,11 @@ const User = {
   // 모델 관계를 정의 (**여기선 자식 모델에서 설정**)
   associate: (db) => {
     // 1:n 관계 부모 모델에 설정하는 방법 (1명의 사원은 복수의 직급 정보를 가진다.)
-    db.User.hasMany(db.Like, { sourceKey: 'id', foreignKey: 'userId', as: 'like-hasmany-user' });
-    db.User.hasMany(db.Post, { sourceKey: 'id', foreignKey: 'userId', as: 'post-hasmany-user' });
-    db.User.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'userId', as: 'comment-hasmany-user' });
-    db.User.hasMany(db.PushSubcription, { sourceKey: 'id', foreignKey: 'userId', as: 'pushsubscription-hasmany-user' });
-    db.User.hasMany(db.Notification, { sourceKey: 'id', foreignKey: 'userId', as: 'notification-hasmany-user' });
+    db.User.hasMany(db.Like, { sourceKey: 'id', foreignKey: 'userId', as: 'user-hasmany-like' });
+    db.User.hasMany(db.Post, { sourceKey: 'id', foreignKey: 'userId', as: 'user-hasmany-post' });
+    db.User.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'userId', as: 'user-hasmany-comment' });
+    db.User.hasMany(db.PushSubcription, { sourceKey: 'id', foreignKey: 'userId', as: 'user-hasmany-pushsubscription' });
+    db.User.hasMany(db.Notification, { sourceKey: 'id', foreignKey: 'userId', as: 'user-hasmany-notification' });
   },
 }
 
