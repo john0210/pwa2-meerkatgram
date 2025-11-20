@@ -1,12 +1,12 @@
 /**
- * @file app/models/User.js
- * @description user model
+ * @file app/models/PushSubscription.js
+ * @description pushsubscription model
  * 251120 v.1.0.0 kimjunghyun init
  */
 import dayjs from 'dayjs';
 import { DataTypes } from 'sequelize';
 
-const modelName = 'User'; //모델명(js 내부에서 사용)
+const modelName = 'PushSubscription'; //모델명(js 내부에서 사용)
 
 
 // 컬럼 정의
@@ -17,52 +17,21 @@ const attributes = {
     primaryKey: true,
     allowNull: false,
     autoIncrement: true,
+    comment: '푸시구독 PK',
+  },
+  userId: {
+    field: 'user_id',
+    type: DataTypes.BIGINT.UNSIGNED,
+    allowNull: false,
     comment: '유저 PK',
   },
-  email: {
-    field: 'email',
-    type: DataTypes.STRING(100),
-    allowNull: false,
-    unique: true,
-    comment: '이메일(로그인ID)'
-  },
-  password: {
-    field: 'password',
+  endpoint: {
+    field: 'endpoint',
     type: DataTypes.STRING(255),
     allowNull: false,
-    comment: '비밀번호',
-  },
-  nick: {
-    field: 'nick',
-    type: DataTypes.STRING(15),
-    allowNull: false,
     unique: true,
-    comment: '닉네임'
-  },
-  provider: {
-    field: 'provider',
-    type: DataTypes.STRING(10),
-    allowNull: false,
-    comment: '로그인 제공자(NONE, KAKAO, GOOGLE...)'
-  },
-  role: {
-    field: 'role',
-    type: DataTypes.STRING(10),
-    allowNull: false,
-    comment: '유저 권한(NOMAL, SUPER...)'
-  },
-  profile: {
-    field: 'profile',
-    type: DataTypes.STRING(100),
-    allowNull: false,
-    comment: '유저 프로필',
-  },
-  refreshToken: {
-    field : 'refresh_token',
-    type: DataTypes.STRING(255),
-    allowNull: true,
-    comment: '리프레시 토큰',
-  },
+    comment: '앤드포인트',
+  },  
   createdAt: {
     field: 'created_at',
     type: DataTypes.DATE,
@@ -73,7 +42,7 @@ const attributes = {
         return null;
       }
       return dayjs(val).format('YYYY-MM-DD HH:mm:ss');
-    }
+    }    
   },
   updatedAt: {
     field: 'updated_at',
@@ -102,12 +71,12 @@ const attributes = {
 };
 
 const options = {
-  tableName: 'users', // 실제 db 테이블명
+  tableName: 'push_subscriptions', // 실제 db 테이블명
   timestamps: true, // createdAt, updatedAt을 자동 관리
   paranoid: true,  // soft delete 설정(deletedAt 자동 관리)
 }
 
-const User = {
+const PushSubscription = {
   init: (sequelize) => {
     const define = sequelize.define(modelName, attributes, options);
 
@@ -123,15 +92,10 @@ const User = {
 
     return define;
   },
+
   // 모델 관계를 정의 (**여기선 자식 모델에서 설정**)
   associate: (db) => {
-    // 1:n 관계 부모 모델에 설정하는 방법 (1명의 사원은 복수의 직급 정보를 가진다.)
-    db.User.hasMany(db.Like, { sourceKey: 'id', foreignKey: 'userId', as: 'like-hasmany-user' });
-    db.User.hasMany(db.Post, { sourceKey: 'id', foreignKey: 'userId', as: 'post-hasmany-user' });
-    db.User.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'userId', as: 'pushsubscription-hasmany-user' });
-    db.User.hasMany(db.PushSubcription, { sourceKey: 'id', foreignKey: 'userId', as: 'pushsubscription-hasmany-user' });
-    db.User.hasMany(db.Notification, { sourceKey: 'id', foreignKey: 'userId', as: 'pushsubscription-hasmany-user' });
+    db.PushSubscription.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'pushsubscription-belongs-to-user'});
   },
 }
-
-export default User;
+export default PushSubscription;
