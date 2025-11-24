@@ -129,7 +129,7 @@ const User = {
     db.User.hasMany(db.Like, { sourceKey: 'id', foreignKey: 'userId', as: 'user-hasmany-like' });
     db.User.hasMany(db.Post, { sourceKey: 'id', foreignKey: 'userId', as: 'user-hasmany-post' });
     db.User.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'userId', as: 'user-hasmany-comment' });
-    db.User.hasMany(db.PushSubcription, { sourceKey: 'id', foreignKey: 'userId', as: 'user-hasmany-pushsubscription' });
+    db.User.hasMany(db.PushSubscription, { sourceKey: 'id', foreignKey: 'userId', as: 'user-hasmany-pushsubscription' });
     db.User.hasMany(db.Notification, { sourceKey: 'id', foreignKey: 'userId', as: 'user-hasmany-notification' });
   },
 }

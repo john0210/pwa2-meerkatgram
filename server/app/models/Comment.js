@@ -91,14 +91,14 @@ const Comment = {
   init: (sequelize) => {
     const define = sequelize.define(modelName, attributes, options);
 
-    // JSON으로 serialize 시, 제외할 컬럼을 지정
-    define.prototype.toJSON = function() {
-      const attributes = this.get();
-      delete attributes.password;
-      delete attributes.refreshToken;
+    // // JSON으로 serialize 시, 제외할 컬럼을 지정
+    // define.prototype.toJSON = function() {
+    //   const attributes = this.get();
+    //   delete attributes.password;
+    //   delete attributes.refreshToken;
       
-      return attributes;
-    }
+    //   return attributes;
+    // }
 
 
     return define;
@@ -108,6 +108,6 @@ const Comment = {
     db.Comment.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'comment-belongs-to-user'});
     db.Comment.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'comment-belongs-to-post'});
   },
-}
+};
 
 export default Comment;

@@ -81,13 +81,13 @@ const PushSubscription = {
     const define = sequelize.define(modelName, attributes, options);
 
     // JSON으로 serialize 시, 제외할 컬럼을 지정
-    define.prototype.toJSON = function() {
-      const attributes = this.get();
-      delete attributes.password;
-      delete attributes.refreshToken;
+    // define.prototype.toJSON = function() {
+    //   const attributes = this.get();
+    //   delete attributes.password;
+    //   delete attributes.refreshToken;
       
-      return attributes;
-    }
+    //   return attributes;
+    // }
 
 
     return define;

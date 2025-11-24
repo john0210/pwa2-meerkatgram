@@ -47,9 +47,15 @@ db.User = User.init(sequelize);
 db.Like = Like.init(sequelize);
 db.Post = Post.init(sequelize);
 db.Comment = Comment.init(sequelize);
-db.Push_subscription = PushSubscription.init(sequelize);
+db.PushSubscription = PushSubscription.init(sequelize);
 db.Notification = Notification.init(sequelize);
 
 // 모델 관계 설정
+User.associate(db);
+Post.associate(db);
+Comment.associate(db);
+Like.associate(db);
+Notification.associate(db);
+PushSubscription.associate(db);
 
 export default db;
