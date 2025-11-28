@@ -18,11 +18,9 @@ async function findByEmail(t = null, email) {
     {
       where: {
         email: email
-      }
-    },
-    {
+      },
       transaction: t
-    }
+    },
   );
 }
 /**

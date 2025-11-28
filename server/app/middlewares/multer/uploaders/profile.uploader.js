@@ -61,8 +61,8 @@ export default function(req, res, next) {
   // 예외 처리
   upload(req, res, err => {
     if(err instanceof multer.MulterError || err) {
-      next(myError(err.message, BAD_FILE_ERROR));
+      return next(myError(err.message, BAD_FILE_ERROR));
     }
-    next();
+    return next();
   }); 
 }
