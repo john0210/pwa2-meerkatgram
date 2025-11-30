@@ -1,6 +1,6 @@
 /**
- * @file app/middlewares/validations/validators/posts/show.validator.js
- * @description 게시글 show 검사기
+ * @file app/middlewares/validations/validators/posts/store.validator.js
+ * @description store
  * 251201 v1.0.0 kim init
  */
 
