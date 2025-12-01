@@ -25,5 +25,5 @@ function getProfilesImagePath() {
 export default {
   getViewDirPath,
   getPostsImagePath,
-  getPostsImagePath,
+  getProfilesImagePath,
 }
