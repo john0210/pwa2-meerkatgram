@@ -32,8 +32,18 @@ async function findByEmail(t = null, email) {
 async function save(t= null, user) {
   return await user.save({trainsaction: t});
 }
+/**
+ * 유저 idfh 유저정보 조회
+ * @param {import("sequelize").Transaction} t 
+ * @param {import("../models/index.js").User} user 
+ * @returns {Promise<ImportAttributes("../models/User.js").User>}
+ */
+async function findByPk(t = null, id) {
+  return await User.findByPk(id, {transaction: t});
+}
 
 export default {
   findByEmail,
   save,
+  findByPk,
 }

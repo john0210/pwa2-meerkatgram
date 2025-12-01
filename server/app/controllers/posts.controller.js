@@ -55,12 +55,12 @@ async function show(req, res, next) {
 async function store(req, res, next) {
   try {
     const data = {
-      userId: req.user.id,
+      userId: req.user.id, // auth middleware에서 셋팅한 값
       content: req.body.content,
       image: req.body.image,
     };
 
-    const result = await postsService.create(data);
+    const result = await postService.create(data);
 
     return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, result));
   } catch(error) {
@@ -78,11 +78,11 @@ async function store(req, res, next) {
 async function destroy(req, res, next) {
   try {
     const data = {
-      userId: req.user.id,
+      userId: req.user.id, // auth middleware에서 셋팅한 값
       postId: req.params.id
     };
 
-    await postsService.destroy(data);
+    await postService.destroy(data);
 
     return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS));
   } catch(error) {

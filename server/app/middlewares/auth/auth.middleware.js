@@ -42,7 +42,8 @@ function authorize(req) {
     //   req.baseUrl, // 프리픽스로 묶은 Path `/api/auth`
     //   req.path // `baseUrl`을 제외한 Path 
     // );
-    return item.path.test(`${req.baseUrl}${req.path}`);
+    const path = req.path.endsWith('/') ? req.path.slice(0, -1) : req.path;
+    return item.path.test(`${req.baseUrl}${path}`);
   });
   // 일치하는 규칙이 있을 시, 인증 및 권한 체크를 실시
   if(matchRole) {
