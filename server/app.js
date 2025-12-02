@@ -26,6 +26,7 @@ app.use(cookieParser()); // 쿠키 파서
 // 정적 파일 제공 등록
 //------------------
 
+
 app.use(process.env.ACCESS_FILE_POST_IMAGE_PATH, express.static(process.env.FILE_POST_IMAGE_PATH));
 app.use(process.env.ACCESS_FILE_USER_PROFILE_PATH, express.static(process.env.FILE_USER_PROFILE_PATH));
 
