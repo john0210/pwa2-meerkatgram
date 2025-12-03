@@ -107,7 +107,7 @@ const Comment = {
   associate: (db) => {
     db.Comment.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'comment-belongs-to-user' });
     db.Comment.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'comment-belongs-to-post' });
-    db.Comment.hasMany(db.Comment, { sourceKey: 'id', foreignKey:'replyId', as: 'replies' });
+    db.Comment.hasMany(db.Comment, { sourceKey: 'id', foreignKey: 'replyId', as: 'replies' });
   },
 };
 
