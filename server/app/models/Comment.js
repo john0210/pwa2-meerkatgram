@@ -105,8 +105,9 @@ const Comment = {
   },
   // 모델 관계를 정의 (**여기선 자식 모델에서 설정**)
   associate: (db) => {
-    db.Comment.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'comment-belongs-to-user'});
-    db.Comment.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'comment-belongs-to-post'});
+    db.Comment.belongsTo(db.User, { targetKey: 'id', foreignKey: 'userId', as: 'comment-belongs-to-user' });
+    db.Comment.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'comment-belongs-to-post' });
+    db.Comment.hasMany(db.Comment, { sourceKey: 'id', foreignKey:'replyId', as: 'replies' });
   },
 };
 

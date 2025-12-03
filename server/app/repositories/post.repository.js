@@ -5,7 +5,7 @@
  */
 
 import db from '../models/index.js';
-const {sequelize, Post, Comment} = db;
+const {sequelize, Post, Comment, User } = db;
 
 /**
  * 게시글 페이지네이션
@@ -43,11 +43,32 @@ async function findByPkWithComments(t = null, id) {
       include: [
         {
           model: Comment,
-          as: 'comments',
+          as: 'post-hasmany-comment',
           where: {
             replyId: 0
           },
           required: false, // Left Join 설정
+          include: [
+            {
+              attributes: ['nick', 'profile'],
+              model: User,
+              as: 'comment-belongs-to-user',
+              required: true, // inner Join 설정              
+            },
+            {
+              model: Comment,
+              as: 'replies',
+              required: false, // Left Join 설정
+              include: [
+                {
+                  attributes: ['nick', 'profile'],
+                  model: User,
+                  as: 'comment-belongs-to-user',
+                  required: true, // inner Join 설정     
+                }
+              ]
+            }
+          ],
         }
       ],
       transaction: t

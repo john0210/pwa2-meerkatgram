@@ -11,7 +11,7 @@ const modelName = 'Post'; //모델명(js 내부에서 사용)
 
 // 컬럼 정의
 const attributes = {
-id: {
+  id: {
     field: 'id',
     type: DataTypes.BIGINT.UNSIGNED,
     primaryKey: true,
