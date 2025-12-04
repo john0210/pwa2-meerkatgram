@@ -30,7 +30,7 @@ async function findByEmail(t = null, email) {
  * @returns 
  */
 async function save(t= null, user) {
-  return await user.save({trainsaction: t});
+  return await user.save({transaction: t});
 }
 /**
  * 유저 idfh 유저정보 조회
@@ -42,8 +42,13 @@ async function findByPk(t = null, id) {
   return await User.findByPk(id, {transaction: t});
 }
 
+async function create(t = null, data) {
+  return await User.create(data, { transaction: t });
+}
+
 export default {
   findByEmail,
   save,
   findByPk,
+  create,
 }

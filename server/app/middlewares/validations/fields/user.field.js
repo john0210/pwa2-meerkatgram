@@ -4,7 +4,8 @@
  * 251119 v.1.0.0 kimjunghyun init
  */
 
-import { body } from "express-validator";
+import { body, param } from "express-validator";
+import PROVIDER from "../../auth/confings/provider.enum.js";
 
 export const email = body('email')
   .trim()
@@ -23,3 +24,19 @@ export const password = body('password')
   .matches(/^[a-zA-Z0-9!@#$]{8,20}$/)
   .withMessage('영어대소문자ㆍ숫자ㆍ!ㆍ@ㆍ#ㆍ$, 8~20자 허용')
 ;
+
+const provider = param('provider')
+  .trim()
+  .notEmpty()
+  .withMessage('필수 항목입니다.')
+  .bail()
+  .custom(val => {
+    return PROVIDER[val.toUpperCase()] ? true : false; 
+  })
+  .withMessage('허용하지 않는 값입니다.')
+
+export default {
+  email,
+  password,
+  provider,
+};
