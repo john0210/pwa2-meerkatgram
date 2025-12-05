@@ -44,6 +44,27 @@ async function login(req, res, next) {
 
 } 
 /**
+ * 로그아웃 컨트롤러 처리
+ * @param {import("express").Request} req - 리퀘스트 객체
+ * @param {import("express").Response} res - 레스폰스 객체
+ * @param {import("express").NextFunction} next  - next 객체
+ * @return
+ */
+async function logout(req, res, next) {
+  try {
+    const id = req.user.id;
+    // 로그아웃 서비스 호출
+    await authService.logout(id);
+
+    // cookie에 refreshToken 만료
+    cookieUtil.clearCookieRefreshToken(res);
+    
+    return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS));
+  } catch(error) {
+    return next(error);
+  }
+}
+/**
  * 토큰 재발급 컨트롤러 처리
  * @param {import("express").Request} req - 리퀘스트 객체
  * @param {import("express").Response} res - 레스폰스 객체
@@ -130,4 +151,5 @@ export default {
   reissue,
   social,
   socialCallback,
+  logout,
 };

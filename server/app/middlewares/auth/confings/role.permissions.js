@@ -11,9 +11,10 @@ const { ADMIN, NORMAL, SUPER } = ROLE;
 const ROLE_PERMISSIONS = {
   GET: [
     { path: /^\/api\/posts\/[0-9]+$/, roles: [NORMAL, SUPER] },
-    { path: /^\/api\/comments\/[0-9]+\/[0-9]+$/, roles: [NORMAL, SUPER]},  
+    { path: /^\/api\/comments\/[0-9]+\/[0-9]+$/, roles: [NORMAL, SUPER] },  
   ],
   POST: [
+    { path: /^\/api\/auth\/logout$/, roles: [NORMAL, SUPER] }, 
     { path: /^\/api\/auth\/reissue$/, roles: [NORMAL, SUPER] }, 
     { path: /^\/api\/posts$/, roles: [NORMAL, SUPER] }, 
     { path: /^\/api\/comments$/, roles: [NORMAL, SUPER] },

@@ -39,11 +39,31 @@ async function save(t= null, user) {
  * @returns {Promise<ImportAttributes("../models/User.js").User>}
  */
 async function findByPk(t = null, id) {
-  return await User.findByPk(id, {transaction: t});
+  return await User.findByPk(id, { transaction: t });
 }
 
 async function create(t = null, data) {
   return await User.create(data, { transaction: t });
+}
+
+async function logout(t = null, id) {
+  return await User.update(
+    {
+      refreshToken: null
+    },
+    {
+      where:
+      
+      {
+        id: id
+      },
+      transaction: t
+    }
+  );  
+  
+  
+  // 특정 유저 리프레시 토큰 null로 갱신
+  // UPDATE users SET refresh_token = null, updated_at = NOW() WHERE id = ?
 }
 
 export default {
@@ -51,4 +71,5 @@ export default {
   save,
   findByPk,
   create,
+  logout,
 }
