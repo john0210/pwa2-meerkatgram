@@ -3,6 +3,7 @@ import './PostIndex.css';
 import { useEffect } from 'react';
 import { postIndexThunk } from '../../store/thunks/postIndexThunk.js';
 import { useNavigate } from 'react-router-dom';
+import { clearPostIndex } from '../../store/slices/postIndexSlice.js';
 
 export default function PostIndex() {
   const navigate = useNavigate();
@@ -10,8 +11,10 @@ export default function PostIndex() {
   const { list, page, isLasted } = useSelector(state => state.postIndex);
 
   useEffect(() => {
-    if(!list) {
-      dispatch(postIndexThunk(page + 1));
+    dispatch(postIndexThunk(page + 1));
+
+    return () => {
+      dispatch(clearPostIndex());
     }
   }, []);
 
