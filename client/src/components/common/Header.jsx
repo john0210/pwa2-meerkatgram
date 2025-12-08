@@ -28,12 +28,12 @@ export default function Header() {
 
   async function logout() {
     try {
+      navigate('/posts');
       const result = await dispatch(logoutThunk());
       if(result.type.endsWith('/rejected')) {
         throw result.payload;
       }    
-      dispatch(clearAuth());
-      navigate('/posts');
+      dispatch(clearAuth()); 
     } catch(error) {
       console.log(error);
     }
